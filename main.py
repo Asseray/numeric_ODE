@@ -1,7 +1,7 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import os
-# from matplotlib.pyplot import savefig
+
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 class ODE(object):
@@ -130,14 +130,19 @@ class ODE(object):
 
 
 if __name__ is "__main__":
+    # ========================= Config ==========================
+    def f_(x, y): return y - 2 * x / y  # dy/dx = f(x, y)
 
-    def f_(x, y): return y - 2 * x / y
-    x_0_, y_0_ = 0, 1
-    x_n_ = 1
 
-    def y_anafunc_(x): return (1 + 2*x)**0.5
-    num_node_ = 10
+    x_0_, y_0_ = 0, 1  # y(x_0) = y_0
+    x_n_ = 1  # 数值解区间的右端点
+    num_node_ = 10  # 数值求解区间的节点数
 
+
+    def y_anafunc_(x): return (1 + 2 * x) ** 0.5  # 解析解
+
+
+    # ===========================================================
     ode_test = ODE(f_, x_0_, y_0_, x_n_, num_node_)
 
     y_approx_ = ode_test.euler_forward()
@@ -157,5 +162,3 @@ if __name__ is "__main__":
 
     y_approx_ = ode_test.runge_kutta_4()
     ode_test.plot(y_anafunc_, y_approx_, 'RK4 method')
-
-    pass
