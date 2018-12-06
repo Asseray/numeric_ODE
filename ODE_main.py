@@ -111,27 +111,30 @@ class ODE(object):
             dir_path = '.\\plot_figure'
             if os.path.exists(dir_path) is False:
                 os.mkdir(dir_path)
-            file_name = y_approx_label + '.jpg'
+            file_name = 'ODE_' + y_approx_label + '.jpg'
             file_path = os.path.join(dir_path, file_name)
             plt.savefig(file_path)
 
+        plt.show()
+
         plt.figure()
-        plt.plot(x_approx, error_y, label='Error of ' + y_approx_label)
+        plt.plot(x_approx, error_y, label='Error_of_' + y_approx_label)
         plt.xlabel('x')
         plt.ylabel('Err')
         plt.legend()
 
         if is_save is not False:
-            file_name = 'Err of ' + y_approx_label + '.jpg'
+            file_name = 'ODE_Err_of_' + y_approx_label + '.jpg'
             file_path = os.path.join('.\\plot_figure', file_name)
             plt.savefig(file_path)
 
         plt.show()
 
 
-if __name__ is "__main__":
+if __name__ == "__main__":
     # ========================= Config ==========================
-    def f_(x, y): return y - 2 * x / y  # dy/dx = f(x, y)
+    def f_(x, y):
+        return y - 2 * x / y  # dy/dx = f(x, y)
 
 
     x_0_, y_0_ = 0, 1  # y(x_0) = y_0
@@ -146,19 +149,19 @@ if __name__ is "__main__":
     ode_test = ODE(f_, x_0_, y_0_, x_n_, num_node_)
 
     y_approx_ = ode_test.euler_forward()
-    ode_test.plot(y_anafunc_, y_approx_, 'Euler method')
+    ode_test.plot(y_anafunc_, y_approx_, 'Euler_method')
     
     y_approx_ = ode_test.euler_backward()
-    ode_test.plot(y_anafunc_, y_approx_, 'Implicit Euler method')
+    ode_test.plot(y_anafunc_, y_approx_, 'Implicit_Euler_method')
 
     y_approx_ = ode_test.trap_method()
     ode_test.plot(y_anafunc_, y_approx_, 'Trapezoid_method')
 
     y_approx_ = ode_test.center_diff()
-    ode_test.plot(y_anafunc_, y_approx_, 'Center difference method')
+    ode_test.plot(y_anafunc_, y_approx_, 'Center_difference_method')
 
     y_approx_ = ode_test.euler_improved()
-    ode_test.plot(y_anafunc_, y_approx_, 'Improved Euler method')
+    ode_test.plot(y_anafunc_, y_approx_, 'Improved_Euler_method')
 
     y_approx_ = ode_test.runge_kutta_4()
-    ode_test.plot(y_anafunc_, y_approx_, 'RK4 method')
+    ode_test.plot(y_anafunc_, y_approx_, 'RK4_method')
